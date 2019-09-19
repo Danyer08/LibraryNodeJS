@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "sa1234",
+    "database": "Library",
+    "host": "localhost",
+    "dialect": "mssql",
+    "dialectOptions": {
+      "encrypt": "true"
+    }
+  },
+  "test": {
+    "username": "sa",
+    "password": "sa1234",
+    "database": "Library",
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "sa",
+    "password": "sa1234",
+    "database": "Library",
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

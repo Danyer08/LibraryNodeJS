@@ -1,0 +1,23 @@
+{
+  "name": "libraryapi",
+  "version": "1.0.0",
+  "description": "LibraryAPI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "DanyerDominguez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hapi": "^18.1.0",
+    "mssql": "^5.1.0",
+    "sequelize": "^5.18.4",
+    "sequelize-cli": "^5.5.1",
+    "tedious": "^6.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  },
+  "keywords": []
+}
