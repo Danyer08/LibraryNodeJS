@@ -1,23 +1,10 @@
-const sequelize = require('sequelize')
+const manager = require('../managers/bookManager.js')
 
-const endpoints = {
+const httpActions = {
     getBooks: () => {
-        return [
-            {
-                id: 1, title: "Narnia", author: "Jon Gondonia"
-            },
-            {
-                id: 2, title: 'AWS for Dummies', author: 'Olivo'
-            },
-            {
-                id: 3, title: 'Admin', author: 'Admin'
-            }
-        ]
-    },
-    createBook: () => {
-        console.log('Book created')
+       return manager.getBooks()
     }
 }
 
-module.exports = endpoints
+module.exports = httpActions
 

@@ -1,5 +1,4 @@
 const controllers = require('../controllers/libraryController.js')
-const db = require('../dataLayer/models/main.js')
 
 const getMethods = [
     {

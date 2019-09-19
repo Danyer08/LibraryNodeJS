@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express")
-const routes = require("./routes/route.js")
+const routes = require("./routes/routes.js")
 
 const getMethods = routes.getMethods
 
