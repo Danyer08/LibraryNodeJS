@@ -1,23 +1,13 @@
-"use strict";
+const libraryController = require('./controllers/libraryController.js')
+const http = require('http');
+const url = require('url');
 
-const express = require("express")
-const routes = require("./routes/routes.js")
+module.exports = http.createServer((req, res) => {
 
-const getMethods = routes.getMethods
+    const reqUrl = url.parse(req.url, true)
 
-const registerServer = () => {
-   const app = express();
+    if (reqUrl.pathname == '/api' && req.method === 'GET') {
+        libraryController.getBooks(req, res)
+    }
 
-   const port = 8000;
-
-   getMethods.forEach(route => {
-      app.get(route.url, route.method);
-   })
-
-   app.listen(port, () => {
-      console.log("Running RestHub on port " + port);
-   });
-}
-
-module.exports.register = registerServer
-
+});

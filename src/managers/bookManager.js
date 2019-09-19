@@ -5,10 +5,11 @@ const repository = require('../repositories/bookRepository.js')
 const services = {
     getBooks: () => {
         try {
-            return repository.getBooks()
+            const books = repository.getBooks()
+            return books
         }
         catch (error) {
-            return error
+            console.log(error)
         }
     }
 }
