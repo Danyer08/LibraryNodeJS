@@ -12,9 +12,9 @@ const services = {
             console.error('Failed to get books: ', error)
         }
     },
-    getBookById: async () => {
+    getBookById: async (id) => {
         try {
-            const book = await repository.getBookById();
+            const book = await repository.getBookById(id);
             return book;
         }
         catch (error) {

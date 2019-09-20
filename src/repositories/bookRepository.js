@@ -13,8 +13,8 @@ const queries = {
 
         return booksResponse;
     },
-    getBookById: async () => {
-        let book = await context.db.sequelize.models['Book'].findByPk(2);
+    getBookById: async (id) => {
+        let book = await context.db.sequelize.models['Book'].findByPk(id);
         return book;
     }
 }

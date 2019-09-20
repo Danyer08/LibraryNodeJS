@@ -12,8 +12,8 @@ const httpActions = {
         }
 
     },
-    getBookById: async (req, res) => {
-        const book = await manager.getBookById();
+    getBookById: async (req, res, id) => {
+        const book = await manager.getBookById(id);
 
         if (!book) {
             return;

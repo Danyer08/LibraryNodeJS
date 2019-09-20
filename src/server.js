@@ -1,16 +1,38 @@
 const bookController = require('./controllers/bookController.js')
 const http = require('http');
-const url = require('url');
 
 module.exports = http.createServer((req, res) => {
+    const currentURL = new URL(`http://localhost:8000${req.url}`);
+    const endpoints = {
+        '/api/books': () => {
+            const httpMethods = {
+                'GET': () => {
+                    const queryParams = currentURL.searchParams;
+                    const id = queryParams.get('id')
+                    if (id) {
+                        bookController.getBookById(req, res, id);
+                    }
+                    else {
+                        bookController.getBooks(req, res);
+                    }
+                }
+            }
 
-    const reqUrl = url.parse(req.url, true);
+            const getHttpMethod = httpMethods[req.method];
+            getHttpMethod();
+        },
+        '/api/books/pages': () => {
+            const httpMethods = {
+                'GET': () => {
 
-    if (reqUrl.pathname == '/api/books' && req.method === 'GET') {
-        bookController.getBooks(req, res);
+                }
+
+            }
+
+            const getHttpMethod = httpMethods[req.method];
+            getHttpMethod();
+        }
     }
-    else if (reqUrl.pathname == '/api/books/1' && req.method === 'GET') {
-        bookController.getBookById(req, res);
-    }
-
+    const executeHttpMethod = endpoints[currentURL.pathname];
+    executeHttpMethod();
 });
