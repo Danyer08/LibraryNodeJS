@@ -1,24 +1,22 @@
 "use strict"
 
-const sequelize = require('sequelize')
+const context = require('../dataLayer/models/main.js');
 
 const queries = {
-    getBooks: () => {
-        return [
-            {
-                id: 1, title: "Narnia", author: "Jon Gondonia"
-            },
-            {
-                id: 2, title: 'AWS for Dummies', author: 'Olivo'
-            },
-            {
-                id: 3, title: 'Admin', author: 'Admin'
-            }
-        ]
+    getBooks: async () => {
+        let booksResponse = [];
+        await context.db.sequelize.model('Book').findAll().then(books => {
+            booksResponse = books.map(book => book.dataValues);
+        }).catch(error => {
+            console.error(error);
+        })
+
+        return booksResponse;
     },
-    createBook: () => {
-        console.log('Book created')
+    getBookById: async () => {
+        let book = await context.db.sequelize.models['Book'].findByPk(2);
+        return book;
     }
 }
 
-module.exports = queries
+module.exports = queries;

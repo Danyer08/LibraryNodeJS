@@ -1,17 +1,17 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Book = sequelize.define('Book', {
+  const Page = sequelize.define('Page', {
     id: {
       type: DataTypes.NUMBER,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true
     },
-    author: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    bookId: DataTypes.NUMBER
   }, {});
-  Book.associate = function(models) {
-    Book.hasMany(models.Page);
+  Page.associate = function (models) {
+    Page.belongsTo(models.Book);
   };
-  return Book;
+  return Page;
 };

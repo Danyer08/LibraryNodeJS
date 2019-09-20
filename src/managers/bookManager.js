@@ -3,13 +3,22 @@
 const repository = require('../repositories/bookRepository.js')
 
 const services = {
-    getBooks: () => {
+    getBooks: async () => {
         try {
-            const books = repository.getBooks()
+            const books = await repository.getBooks()
             return books
         }
         catch (error) {
-            console.log(error)
+            console.error('Failed to get books: ', error)
+        }
+    },
+    getBookById: async () => {
+        try {
+            const book = await repository.getBookById();
+            return book;
+        }
+        catch (error) {
+            console.error('Failed to get book by id: ', error)
         }
     }
 }

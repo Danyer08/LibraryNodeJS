@@ -6,7 +6,9 @@
     "host": "localhost",
     "dialect": "mssql",
     "dialectOptions": {
-      "encrypt": "true"
+      "options" : {
+        "encrypt": true
+      }
     }
   },
   "test": {
