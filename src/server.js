@@ -5,7 +5,7 @@ module.exports = http.createServer((req, res) => {
     const currentURL = new URL(`http://localhost:8000${req.url}`);
     const endpoints = {
         '/api/books': () => {
-            const httpMethods = {
+            return {
                 'GET': () => {
                     const queryParams = currentURL.searchParams;
                     const id = queryParams.get('id')
@@ -17,22 +17,19 @@ module.exports = http.createServer((req, res) => {
                     }
                 }
             }
-
-            const getHttpMethod = httpMethods[req.method];
-            getHttpMethod();
         },
         '/api/books/pages': () => {
-            const httpMethods = {
+            return {
                 'GET': () => {
-
+                    const queryParams = currentURL.searchParams;
+                    const bookId = queryParams.get('bookId');
+                    bookController.getPagesByBookId(req, res, bookId);
                 }
 
             }
-
-            const getHttpMethod = httpMethods[req.method];
-            getHttpMethod();
         }
     }
+
     const executeHttpMethod = endpoints[currentURL.pathname];
-    executeHttpMethod();
+    executeHttpMethod !== undefined ? executeHttpMethod()[req.method]() : bookController.notFoundHandler(req, res);
 });
