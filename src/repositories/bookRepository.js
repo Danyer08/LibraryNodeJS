@@ -5,7 +5,7 @@ const context = require('../dataLayer/models/main.js');
 const queries = {
     getBooks: async () => {
         try {
-            return await context.db.sequelize.models('Book').findAll();
+            return await context.db.sequelize.model('Book').findAll();
         } catch (error) {
             console.error('Error Ocurred: ', error);
         }

@@ -1,4 +1,5 @@
-const manager = require('../managers/bookManager.js')
+const manager = require('../managers/bookManager.js');
+const exceptions = require('./httpExceptions.js');
 
 const httpActions = {
     getBooks: async (req, res) => {
@@ -9,7 +10,7 @@ const httpActions = {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(books));
         } catch (error) {
-            badRequest(res, error);
+            exceptions.badRequest(res, error);
         }
 
     },
@@ -34,18 +35,7 @@ const httpActions = {
         } catch (error) {
             badRequest(res, error);
         }
-    },
-    notFoundHandler: (req, res) => {
-        res.statusCode = 404;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify("Not Found"))
     }
-}
-
-const badRequest = (res, body) => {
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(`Bad Request: ${body}`))
 }
 
 module.exports = httpActions;

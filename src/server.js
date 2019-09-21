@@ -1,8 +1,11 @@
-const bookController = require('./controllers/bookController.js')
 const http = require('http');
+const environment = require('./environment/environment.js')
+const bookController = require('./controllers/bookController.js')
+const exceptions = require('./controllers/httpExceptions.js')
+const pageController = require('./controllers/pageController.js')
 
 module.exports = http.createServer((req, res) => {
-    const currentURL = new URL(`http://localhost:8000${req.url}`);
+    const currentURL = new URL(`http://${environment.hostname}:${environment.port}${req.url}`);
     const endpoints = {
         '/api/books': () => {
             return {
@@ -23,7 +26,16 @@ module.exports = http.createServer((req, res) => {
                 'GET': () => {
                     const queryParams = currentURL.searchParams;
                     const bookId = queryParams.get('bookId');
-                    bookController.getPagesByBookId(req, res, bookId);
+                    const id = queryParams.get('id')
+                    if (id && bookId) {
+                        pageController.getPageById(req, res, id, bookId);
+                    }
+                    else if(bookId) {
+                        bookController.getPagesByBookId(req, res, bookId);
+                    } 
+                    else {
+                        exceptions.internalServerError(req, res);
+                    }
                 }
 
             }
@@ -31,5 +43,5 @@ module.exports = http.createServer((req, res) => {
     }
 
     const executeHttpMethod = endpoints[currentURL.pathname];
-    executeHttpMethod !== undefined ? executeHttpMethod()[req.method]() : bookController.notFoundHandler(req, res);
+    executeHttpMethod !== undefined ? executeHttpMethod()[req.method]() : exceptions.internalServerError(req, res);
 });

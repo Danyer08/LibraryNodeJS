@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true
     },
+    name: DataTypes.STRING,
     author: DataTypes.STRING,
     description: DataTypes.STRING
   }, {});

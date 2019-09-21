@@ -5,15 +5,26 @@ const repository = require('../repositories/bookRepository.js')
 const services = {
     getBooks: async () => {
         const books = await repository.getBooks();
-        return books;
+        const booksResponse = books.map(book => { book.id, book.name, book.description, book.author });
+
+        return booksResponse;
     },
     getBookById: async (id) => {
         const book = await repository.getBookById(id);
-        return book;
+        const bookResponse = {
+            id: book.id,
+            name: book.name,
+            description: book.description,
+            author: book.author
+        }
+
+        return bookResponse;
     },
     getPagesByBookId: async (bookId) => {
         const pages = await repository.getPagesByBookId(bookId);
-        return pages;
+        const pagesResponse = pages.map(page => { page.id, page.description });
+
+        return pagesResponse;
     }
 }
 
