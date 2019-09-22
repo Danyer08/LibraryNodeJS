@@ -1,14 +1,12 @@
 const manager = require('../managers/pageManager.js');
 const exceptions = require('./httpExceptions.js');
+const response = require('../controllers/httpResponse.js');
 
 const httpActions = {
     getPageByNumber: async (req, res, pageNumber, bookId, isHTML) => {
         try {
             const page = await manager.getPageByNumber(pageNumber, bookId, isHTML);
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.write(page);
-            res.end();
+            response(res, 200, page);
         } catch (error) {
             exceptions.badRequest(res, error);
         }
@@ -16,10 +14,7 @@ const httpActions = {
     getPagesByBookId: async (req, res, bookId) => {
         try {
             const pages = await manager.getPagesByBookId(bookId);
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.write(pages);
-            res.end();
+            response(res, 200, pages);
         } catch (error) {
             exceptions.badRequest(res, error);
         }

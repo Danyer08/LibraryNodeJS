@@ -21,7 +21,6 @@ module.exports = http.createServer((req, res) => {
                         }
                     }
                     catch (error) {
-                        console.log(error);
                         exceptions.internalServerError(req, res, error);
                     }
                 }
@@ -48,11 +47,11 @@ module.exports = http.createServer((req, res) => {
                         exceptions.internalServerError(req, res, error);
                     }
                 }
-
             }
         }
     }
 
     const executeHttpMethod = endpoints[currentURL.pathname];
-    executeHttpMethod !== undefined ? executeHttpMethod()[req.method]() : exceptions.internalServerError(req, res);
+    const error = `There was not endpoint listening at ${currentURL}`;
+    executeHttpMethod !== undefined ? executeHttpMethod()[req.method]() : exceptions.internalServerError(req, res, error);
 });
