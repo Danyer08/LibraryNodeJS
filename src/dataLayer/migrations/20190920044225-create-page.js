@@ -11,6 +11,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING(4000)
       },
+      number: {
+        type: Sequelize.INTEGER
+      },
       bookId: {
         type: Sequelize.INTEGER,
         references: {

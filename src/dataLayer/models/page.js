@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     description: DataTypes.STRING,
+    number: DataTypes.NUMBER,
     bookId: DataTypes.NUMBER
   }, {});
   Page.associate = function (models) {

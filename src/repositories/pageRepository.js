@@ -3,13 +3,11 @@
 const context = require('../dataLayer/models/main.js');
 
 const queries = {
-    getPage: async (id, bookId) => {
-        try {
-            return await context.db.sequelize.model('Page').findAll({ where: { id: id, bookId: bookId } })
-        }
-        catch (error) {
-            return error;
-        }
+    getPage: async (pageNumber, bookId) => {
+        return await context.db.sequelize.model('Page').findAll({ where: { bookId: bookId, number: pageNumber } });
+    },
+    getPagesByBookId: async (bookId) => {
+        return await context.db.sequelize.model('Page').findAll({ where: { bookId: bookId } });
     }
 }
 
