@@ -12,9 +12,16 @@ const services = {
         const pageResponse = new pageDTO(mappedPage.id, mappedPage.description, mappedPage.number);
         isHTML === 'true' ? isHTML = true : isHTML = false;
         if (isHTML) {
-            return environment.htmlTemplate.replace('[PageNumber]', pageResponse.number).replace('[Description]', pageResponse.description)
+            return {
+                body: environment.htmlTemplate.replace('[PageNumber]', pageResponse.number)
+                    .replace('[Description]', pageResponse.description),
+                contentType: 'text/html'
+            }
         } else {
-            return JSON.stringify(pageResponse);
+            return {
+                body: JSON.stringify(pageResponse),
+                contentType: 'application/json'
+            }
         }
     },
     getPagesByBookId: async (bookId) => {

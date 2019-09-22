@@ -6,7 +6,7 @@ const httpActions = {
     getPageByNumber: async (req, res, pageNumber, bookId, isHTML) => {
         try {
             const page = await manager.getPageByNumber(pageNumber, bookId, isHTML);
-            response(res, 200, page);
+            response(res, 200, page.body, page.contentType);
         } catch (error) {
             exceptions.badRequest(res, error);
         }

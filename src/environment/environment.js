@@ -19,7 +19,7 @@ module.exports = {
                     <div class="container d-flex justify-content-center">
                         <div class="card card-style">
                             <div class="card-header header-background">
-                                <h1 class="text-center header-text-color">Page Number [PageNumber]</h1>
+                                <h1 class="text-center header-text-color">Page #[PageNumber]</h1>
                             </div>
                             <div class="card-body read-mode-background">
                                 <p class="page-content">[Description]</p>
